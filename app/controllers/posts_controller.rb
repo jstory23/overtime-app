@@ -21,10 +21,12 @@ class PostsController < ApplicationController
 	end
 
 	def edit
-
+		authorize @post
 	end
 
 	def update
+		authorize @post
+
 		if @post.update(post_params)
 			redirect_to @post, notice: 'Your post was edited successfully'
 		else
@@ -32,13 +34,12 @@ class PostsController < ApplicationController
 		end
 	end
 
-
 	def show
 	end
 
 	def destroy
-		@post.delete
-			redirect_to posts_path, notice: 'Your post was deleted successfully'
+    @post.delete
+    redirect_to posts_path, notice: 'Your post was deleted successfully'
 	end
 
 	private
